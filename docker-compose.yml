@@ -1,0 +1,24 @@
+version: '3.5'
+
+services:
+  mariadb_express:
+    container_name: mariadb_express
+    image: mariadb:10.5
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mariadb}
+      MYSQL_USER: ${MYSQL_USER:-admin}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-123456}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+    ports:
+      - "${db_port}:3306"
+    networks:
+      - mariadb_express
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+networks:
+  mariadb_erav_license:
+    driver: bridge
+
+volumes:
+  mariadb_data:
