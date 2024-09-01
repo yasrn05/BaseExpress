@@ -1,13 +1,13 @@
 const menuBar = document.querySelector(".menu-bar")
-menuBar.addEventListener("click",function(){
+menuBar.addEventListener("click", function () {
     menuBar.classList.toggle("active")
     document.querySelector(".menu-items").classList.toggle("active")
 })
 const toP = document.querySelector(".top")
-window.addEventListener("scroll",function() {
+window.addEventListener("scroll", function () {
     const x = this.pageYOffset;
-    if (x>50) {toP.classList.add("active")}
-    else{toP.classList.remove("active")}
+    if (x > 50) { toP.classList.add("active") }
+    else { toP.classList.remove("active") }
 })
 
 const search = document.querySelector('.input-group input'),
@@ -66,19 +66,19 @@ function sortTable(column, sort_asc) {
         .map(sorted_row => document.querySelector('tbody').appendChild(sorted_row));
 }
 // Create
-document.querySelector(".btn-create").addEventListener("click", function() { 
-    document.querySelector(".wrapper2").style.display= "flex";
+document.querySelector(".btn-create").addEventListener("click", function () {
+    document.querySelector(".wrapper2").style.display = "flex";
 })
-document.querySelector(".close").addEventListener("click", function() {
+document.querySelector(".close").addEventListener("click", function () {
     document.querySelector(".wrapper2").style.display = "none";
 });
 // Edit
 var editButtons = document.querySelectorAll(".btn-edit");
-editButtons.forEach(function(button) {
-    button.addEventListener("click", function() {
+editButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
         var id = parseInt(this.getAttribute("data-id"));
         document.getElementById("edit" + id).style.display = "flex";
-        document.getElementById("close" + id).addEventListener("click", function() { 
+        document.getElementById("close" + id).addEventListener("click", function () {
             document.getElementById("edit" + id).style.display = "none";
         })
     });
