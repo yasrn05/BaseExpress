@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Comatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Manager</title>
+</head>
+<body>
+    <section class="top">
+        <div class="container">
+            <div class="row justify-content">
+                <div class="logo"><a href="/"><img src="/images/logo.png" alt="Logo"></a></div>
+                <div class="menu-bar">
+                    <span></span>
+                </div>
+                <div class="menu-items">
+                    <ul>
+                        <li class="menu-item">
+                            <i class='bx bxs-home'></i>
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="menu-item">
+                            <i class='bx bx-user-circle' ></i>
+                            <a href="/profile">Profile</a>
+                        </li>
+                        <li class="menu-item">
+                            <i class='bx bx-package' ></i>
+                            <a href="/managerProducts">Products</a>
+                        </li>
+                        <li class="menu-item">
+                            <i class='bx bx-archive-in'></i>
+                            <a href="/managerInputs/<%= manager.id%>">Inputs</a>
+                        </li>
+                        <li class="menu-item">
+                            <i class='bx bx-archive-out' ></i>
+                            <a href="/managerOutputs/<%= manager.id%>">Outputs</a>
+                        </li>
+                        <li class="menu-item">
+                            <i class='bx bx-log-out' ></i>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="big-image">
+        <div class="wrapper2">
+            <div class="wrapper2Content">
+                <form action="/postCreateInfoInput" method="post">
+                    <div class="close">
+                        <i class='bx bx-x-circle'></i>
+                    </div>
+                    <h1>New</h1>
+                    <div class="input-box d-none">
+                        <input type="number" name="idInput" value="<%= idInput%>" placeholder="ID Input" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="number" name="idProduct" placeholder="ID Product" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="quantity" placeholder="Quantity" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="price" value="0" placeholder="Price" required>
+                    </div>
+                    <div class="input-box d-none">
+                        <input type="text" name="status" value="Shipping" placeholder="Status" required>
+                    </div>
+                    <button type="submit" class="btn">Create</button>
+                </form>
+            </div>
+        </div>
+        <div class="big-image-content">
+            <div class="table">
+                <section class="table__header">
+                    <button class="btn-create" id="btn-create"></button>
+                    <h1>Welcome: <%= manager.name%> - <%= manager.id%></h1>
+                    <h1>Info Input: <%= idInput%></h1>
+                    <div class="input-group">
+                        <input type="search" placeholder="Search Data...">
+                    </div>
+                </section>
+                <section class="table__body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Product <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Category <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Code <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Quantity <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Price <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Status <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Actions </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% infoInput.forEach(function(info) { %>
+                            <tr>
+                                <td><%= info.id %></td>
+                                <td><%= info.nameProduct %></td>
+                                <td><%= info.categoryProduct %></td>
+                                <td><%= info.codeProduct %></td>
+                                <td><%= info.quantity %></td>
+                                <td><%= info.price %></td>
+                                <td><%= info.status %></td>
+                                <td class="actions">
+                                    <button class="btn-edit" data-id="<%= info.id %>"></button>
+                                </td>
+                            </tr>
+                            <div class="wrapper3" id="edit<%= info.id %>">
+                                <div class="wrapper3Content">
+                                    <form action="/postEditInfoInput" method="post" class="editForm">
+                                        <div class="close" id="close<%= info.id %>">
+                                            <i class='bx bx-x-circle'></i>
+                                        </div>
+                                        <h1>Edit</h1>
+                                        <div class="input-box d-none">
+                                            <input type="text" name="idEdit" value="<%= info.id %>" placeholder="Id" required>
+                                        </div>
+                                        <div class="input-box">
+                                            <input type="number" name="idProduct" value="<%= info.idProduct %>" placeholder="Id Product" required>
+                                        </div>
+                                        <div class="input-box">
+                                            <input type="number" name="quantity" value="<%= info.quantity %>" placeholder="Quantity" required>
+                                        </div>
+                                        <div class="input-box">
+                                            <input type="text" name="price" value="<%= info.price %>" placeholder="Price" required>
+                                        </div>
+                                        <div class="input-box d-none">
+                                            <input type="text" name="statusEdit" value="<%= info.status %>" placeholder="Status" required>
+                                        </div>
+                                        <button type="submit" class="btn">Update</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% }); %>   
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </section>
+    <script src="/js/script.js"></script>
+</body>
+</html>
